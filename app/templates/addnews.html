@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NewsCast - News for the people , by the people.</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+	<!-- Page css -->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/addnews.css')}}">
+</head>
+<body>
+	{% include "includes/nav.html" %}
+	{% with messages=get_flashed_messages(with_categories=true) %}
+    	{% if messages %}
+    		{% for category,message in messages %}
+    			<div class="alert alert-{{category}}" style="margin: 0 !important;">
+    				<p>{{ message }}</p>
+    			</div>
+    		{% endfor %}
+    	{% endif %}
+    {% endwith %}
+    <div class="container-fluid" style="margin:0 !important; padding: 0 !important;">
+		<div class="jumbotron text-center" style="margin:0 !important;">
+			<h1> Add News </h1>
+		</div>
+		<div class="container my-4" style="max-width: 500px;">
+			<div class="jumbotron">
+			<form name="addnews" action="" method="post" novalidate>
+			<fieldset class="form-group">
+				{{form.hidden_tag()}}
+				<p>{{form.headline.label}}<br>{{form.headline(size=50)}}
+					{% for error in form.headline.errors %}
+		                <span class="error-message">{{error}}</span>
+		            {% endfor %}
+				</p>
+				<p>{{form.description.label}}<br>{{form.description(cols="53",rows="10")}}
+					{% for error in form.description.errors %}
+		                <span class="error-message">{{error}}</span>
+		            {% endfor %}
+				</p>
+				<div class="text-center">
+				<p>{{form.cat_news.label}}<br>{{form.cat_news}}
+					{% for error in form.cat_news.errors %}
+		                <span class="error-message">{{error}}</span>
+		            {% endfor %}
+				</p>
+				</div>
+				<br>
+				<div class="text-center" >
+				<p >{{form.submit}}</p>
+				</div>
+			</fieldset>
+			</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

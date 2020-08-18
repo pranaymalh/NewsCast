@@ -1,0 +1,10 @@
+body{
+	background-image: url("/static/images/index_background.jpg");
+	background-repeat: no-repeat;
+}
+.nav-link{
+	color:white !important;
+}
+.safed{
+	color: white !important;
+}

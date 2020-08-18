@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NewsCast - News for the people , by the people.</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+	<!-- Page css -->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/logincss.css')}}">
+</head>
+<body>
+	{% include "includes/nav.html" %}
+	{% with messages=get_flashed_messages(with_categories=true) %}
+    	{% if messages %}
+    		{% for category,message in messages %}
+    			<div class="alert alert-{{category}}" style="margin: 0 !important;">
+    				<p>{{ message }}</p>
+    			</div>
+    		{% endfor %}
+    	{% endif %}
+    {% endwith %}
+	<div class="container-fluid" style="margin:0 !important; padding: 0 !important;">
+		<div class="jumbotron text-center" style="margin:0 !important;">
+			<h1> Login </h1>
+		</div>
+		<div class="container my-4" style="max-width: 500px;">
+			<div class="jumbotron">
+			<form name="login" action="" method="post" novalidate>
+			<fieldset class="form-group">
+				{{form.hidden_tag()}}
+				<p>{{form.email.label}}<br>{{form.email(size=50)}}
+					{% for error in form.email.errors %}
+		                <span class="error-message" style="color:red;">{{error}}</span>
+		            {% endfor %}
+				</p>
+				<p>{{form.password.label}}<br>{{form.password(size=50)}}
+					{% for error in form.password.errors %}
+		                <span class="error-message" style="color:red;">{{error}}</span>
+		            {% endfor %}
+				</p>
+				<br>
+				<div class="text-center">
+				<p>{{form.submit}}</p>
+				</div>
+			</fieldset>
+			</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

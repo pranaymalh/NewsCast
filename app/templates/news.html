@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NewsCast - News for the people , by the people.</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+	<!-- Page css -->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/newscss.css')}}">
+</head>
+<body>
+	{% include "includes/nav.html" %}
+	<div class="container text-right mt-4">
+		{% if session.get("username") %}
+		<a href="{{url_for('addnews')}}" class="btn btn-primary">Add News</a>
+		{% endif %}
+	</div>
+	<div class="container mt-4">
+		<ul class="list-group">
+			{% for data in classes %}
+				<li class="list-group-item" style="margin:20px 0px !important;">
+					<div class="container">
+						<h5 style="color:blue;">{{data["cat_news"]}}</h5>
+						<h3>{{data["headline"]}}</h3>
+						<p>{{data["description"]}}</p>
+						<h4>~{{data["author_name"]}}</h4>
+						{% if session.get("email")=="admin@xyz.com" %}
+						<a href='deletenews/{{data.news_id}}' class="btn btn-primary">Delete News</a>	
+						{% endif %}
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+</body>
+</html>
